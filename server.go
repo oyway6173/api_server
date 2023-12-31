@@ -11,6 +11,8 @@ func main() {
 	http.HandleFunc("/health", handleHealth)
 	http.HandleFunc("/health", handleNewEndpoint)
 
+	fmt.Println("added print statement")
+
 	addr := "localhost:8000"
 	log.Printf("listening on %s ...", addr)
 
