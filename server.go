@@ -9,6 +9,7 @@ import (
 func main() {
 	http.HandleFunc("/hello-world", handleHelloWorld)
 	http.HandleFunc("/health", handleHealth)
+	http.HandleFunc("/health", handleNewEndpoint)
 
 	addr := "localhost:8000"
 	log.Printf("listening on %s ...", addr)
@@ -29,6 +30,15 @@ func handleHelloWorld(writer http.ResponseWriter, request *http.Request) {
 }
 
 func handleHealth(writer http.ResponseWriter, request *http.Request) {
+	fmt.Println("health endpoint triggered")
+	if request.Method != "GET" {
+		http.Error(writer, http.StatusText(http.StatusMethodNotAllowed), http.StatusMethodNotAllowed)
+	}
+
+	writeResponse(writer, "Ok!")
+}
+
+func handleNewEndpoint(writer http.ResponseWriter, request *http.Request) {
 	fmt.Println("health endpoint triggered")
 	if request.Method != "GET" {
 		http.Error(writer, http.StatusText(http.StatusMethodNotAllowed), http.StatusMethodNotAllowed)
