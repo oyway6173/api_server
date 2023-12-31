@@ -41,7 +41,7 @@ func handleHealth(writer http.ResponseWriter, request *http.Request) {
 }
 
 func handleNewEndpoint(writer http.ResponseWriter, request *http.Request) {
-	fmt.Println("health endpoint triggered")
+	fmt.Println("NewEndpoint endpoint triggered")
 	if request.Method != "GET" {
 		http.Error(writer, http.StatusText(http.StatusMethodNotAllowed), http.StatusMethodNotAllowed)
 	}
@@ -51,7 +51,6 @@ func handleNewEndpoint(writer http.ResponseWriter, request *http.Request) {
 
 func writeResponse(writer http.ResponseWriter, responseString string) {
 	response := []byte(responseString)
-	fmt.Println(response)
 	_, err := writer.Write(response)
 	if err != nil {
 		fmt.Println(err)
